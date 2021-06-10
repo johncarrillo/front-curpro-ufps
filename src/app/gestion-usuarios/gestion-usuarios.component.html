@@ -1,0 +1,74 @@
+<div class="panel-header panel-header-sm">
+</div>
+<div class="main-content">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header">
+          <h5 class="title">Gestion de Usuarios</h5>
+        </div>
+        <div class="card-body">
+        <app-agregar-usuario (cargarUsuarios)="listarUsuarios()" [setUsuario]="usuarioSelectEdit"></app-agregar-usuario>
+          <table class="table" *ngIf="usuarios.length > 0">
+            <thead>
+              <tr>
+                <th scope="col">Nombre</th>
+                <th scope="col">Apellido</th>
+                <th scope="col">Correo</th>
+                <th scope="col">Roles</th>
+                <th scope="col">Acciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let usu of usuarios">
+                <td>{{ usu.nombre }}</td>
+                <td>{{ usu.apellido }}</td>
+                <td>{{ usu.correo }}</td>
+                <td>
+                  <span class="badge bg-primary mx-1" style="color: antiquewhite;" *ngFor="let nombreRol of rolesActiveToString(usu.roles)">
+                    {{ nombreRol }}
+                  </span>
+                </td>
+                <td>
+                  <button type="button"
+                          class="btn btn-primary btn-round mx-1"
+                          ngbPopover="Gestionar Rol"
+                          triggers="mouseenter:mouseleave"
+                          (click)="openSm(content, usu)">
+                    <h6 class="my-0"><i class="fas fa-tasks"></i></h6>
+                  </button>
+                  <button type="button"
+                          class="btn btn-warning btn-round mx-1"
+                          ngbPopover="Modificar"
+                          triggers="mouseenter:mouseleave"
+                          (click)="openSmEditar(usu)">
+                    <h6 class="my-0"><i class="fas fa-edit"></i></h6>
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <ng-template #content let-modal>
+            <div class="modal-header">
+              <h4 class="modal-title" id="modal-basic-title">Roles de Usuario</h4>
+              <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <div *ngFor="let rol of roles" class="mx-4">
+                <input class="form-check-input" type="checkbox" (click)="clickRol(rol)" ([ng-model])="rol.select"  [checked]="rol.select">
+                <label class="form-check-label" for="flexCheckDefault">
+                  {{ rol.nombre }}
+                </label>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Cerrar</button>
+            </div>
+          </ng-template>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

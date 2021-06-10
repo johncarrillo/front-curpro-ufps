@@ -1,0 +1,21 @@
+
+<div class="logo" style="background-color: #DD4B39 !important;">
+    <a class="simple-text logo-mini">
+      <div class="logo-img">
+          <img src="{{usuario.photoUrl}}"/>
+      </div>
+    </a>
+    <div class="simple-text logo-normal" >
+        {{ rol }}
+    </div>
+</div> 
+<div class="sidebar-wrapper" style="background-color: #F9FAFC !important; color: #333  !important;">
+    <ul class="nav">
+        <li routerLinkActive="active" *ngFor="let menuItem of menuItems" class="{{menuItem.class}} nav-item">
+            <a [routerLink]="[menuItem.path]" >
+                <i class="now-ui-icons {{menuItem.icon}} design_app" style="color: #000000 !important;"></i>
+                <p style="font-size: 14px; color: #333  !important; font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif !important;">{{menuItem.title}}</p>
+            </a>
+        </li>
+    </ul>
+</div>

@@ -1,0 +1,1233 @@
+<div class="main-content">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-body">
+                    <div *ngIf="this.itemGastoList.length>0">
+                        <table datatable [dtOptions]="[concepto1, valor1]"
+                            class="table table-striped table-bordered row-border hover">
+                            <thead>
+                                <tr>
+                                    <th scope="col" sortable="concepto1">Concepto</th>
+                                    <th scope="col" sortable="valor1">Valor</th>
+                                    <th scope="col">Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                                <tr *ngFor="let gasto of this.itemGastoList">
+                                    <td *ngIf="gasto.nombre==='Servicios Profesionales'">Servicios Profesionales</td>
+                                    <td *ngIf="gasto.nombre==='Servicios Profesionales'"> {{gasto.valor}}</td>
+                                    <td *ngIf="gasto.nombre==='Servicios Profesionales'">
+                                        <button type="button" class="btn btn-primary"
+                                            (click)="open(servicioProfesionales, gasto.nombre)">
+                                            <i class="fas fa-plus-circle mx-1"></i> Ver Detalles
+                                        </button>
+                                    </td>
+                                </tr>
+
+                                <tr *ngFor="let gasto of this.itemGastoList">
+                                    <td *ngIf="gasto.nombre==='Gastos Generales'">Gastos Generales</td>
+                                    <td *ngIf="gasto.nombre==='Gastos Generales'"> {{gasto.valor}}</td>
+                                    <td *ngIf="gasto.nombre==='Gastos Generales'">
+                                        <button type="button" class="btn btn-primary"
+                                            (click)="open(gastosGeneral, gasto.nombre)">
+                                            <i class="fas fa-plus-circle mx-1"></i> Ver Detalles
+                                        </button>
+                                    </td>
+                                </tr>
+                                <tr *ngFor="let gasto of this.itemGastoList">
+                                    <td *ngIf="gasto.nombre==='Otros Gastos'">Otros Gastos</td>
+                                    <td *ngIf="gasto.nombre==='Otros Gastos'"> {{gasto.valor}}</td>
+                                    <td *ngIf="gasto.nombre==='Otros Gastos'">
+                                        <button type="button" class="btn btn-primary"
+                                            (click)="open(otrosGastos, gasto.nombre)">
+                                            <i class="fas fa-plus-circle mx-1"></i> Ver Detalles
+                                        </button>
+                                    </td>
+                                </tr>
+
+
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div *ngIf="this.itemGastoList.length===0">
+                        <table datatable [dtOptions]="[concepto2, valor2]"
+                            class="table table-striped table-bordered row-border hover">
+                            <thead>
+                                <tr>
+                                    <th scope="col" sortable="concepto2">Concepto</th>
+                                    <th scope="col" sortable="valor2">Valor</th>
+                                    <th scope="col">Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Servicios Profesionales</td>
+                                    <td> 0</td>
+                                    <td>
+                                        <button type="button" class="btn btn-primary"
+                                            (click)="open(servicioProfesionales, 'Servicios Profesionales')">
+                                            <i class="fas fa-plus-circle mx-1"></i> Ver Detalles
+                                        </button>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td>Gastos Generales</td>
+                                    <td> 0 </td>
+                                    <td>
+                                        <button type="button" class="btn btn-primary"
+                                            (click)="open(gastosGeneral, 'Gastos Generales')">
+                                            <i class="fas fa-plus-circle mx-1"></i> Ver Detalles
+                                        </button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Otros Gastos</td>
+                                    <td> 0 </td>
+                                    <td>
+                                        <button type="button" class="btn btn-primary"
+                                            (click)="open(otrosGastos, 'Otros Gastos')">
+                                            <i class="fas fa-plus-circle mx-1"></i> Ver Detalles
+                                        </button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<ng-template #servicioProfesionales let-c="close" let-d="dismiss">
+    <div class="modal-header">
+        <h4 class="modal-title">Servicios Profesionales</h4>
+        <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <ul ngbNav #nav="ngbNav" [(activeId)]="active" class="nav-tabs">
+                        <li [ngbNavItem]="1">
+                            <a ngbNavLink>Servicio Educativo Honorarios</a>
+                            <ng-template ngbNavContent>
+                                <div class="col-md-12">
+                                    <button type="button" class="btn btn-primary"
+                                        (click)="registrar(registrarHonorario)">
+                                        <i class="fas fa-plus-circle mx-1"></i> Agregar Item
+                                    </button>
+                                </div>
+
+                                <table datatable
+                                    [dtOptions]="[nombreDocente1, escolaridad1, escalafon1, puntaje1,valorPunto1,valorHora1, numeroHora1]"
+                                    class="table table-striped table-bordered row-border hover"
+                                    *ngIf="this.honorarioList.length>0">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col" sortable="nombreDocente1">Nombre del docente</th>
+                                            <th scope="col" sortable="escolaridad1">Escolaridad</th>
+                                            <th scope="col" sortable="escalafon1">Escalafon </th>
+                                            <th scope="col" sortable="puntaje1">Puntaje </th>
+                                            <th scope="col" sortable="valorPunto1">Valor Punto</th>
+                                            <th scope="col" sortable="valorHora1">Valor Hora </th>
+                                            <th scope="col" sortable="numeroHora1">Numero Horas</th>
+                                            <th scope="col" sortable="valortotal">total</th>
+                                            <th scope="col">Opciones</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let h of this.honorarioList">
+                                            <td>{{h.nombreDocente}} </td>
+                                            <td>{{h.escolaridad}}</td>
+                                            <td>{{h.escalafon}}</td>
+                                            <td>{{h.puntaje}}</td>
+                                            <td>{{h.valorPunto}}</td>
+                                            <td>{{h.valorHora}}</td>
+                                            <td>{{h.cantidadHora}}</td>
+                                            <td>{{h.valorTotal}}</td>
+                                            <td>
+                                                <button type="button" class="btn btn-primary"
+                                                    (click)="registrar(registrarHonorario, h)">
+                                                    <i class="fas fa-plus-circle mx-1"></i> Editar
+                                                </button>
+                                            </td>
+                                        </tr>
+
+                                    </tbody>
+                                </table>
+                            </ng-template>
+                        </li>
+                        <li [ngbNavItem]="2">
+                            <a ngbNavLink>Coordinacion</a>
+                            <ng-template ngbNavContent>
+
+                                <div class="col-md-12">
+                                    <button type="button" class="btn btn-primary"
+                                        (click)="registrarC(registrarCoordinacion)">
+                                        <i class="fas fa-plus-circle mx-1"></i> Agregar Item
+                                    </button>
+                                </div>
+
+                                <table *ngIf="this.coordinacionList.length>0" datatable
+                                    [dtOptions]="[nombreCoordinador1, perfil1, idoniedad1, valor1]"
+                                    class="table table-striped table-bordered row-border hover">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col" sortable="nombreCoordinador1">Nombre del coordinador</th>
+                                            <th scope="col" sortable="perfil1">Perfil</th>
+                                            <th scope="col" sortable="idoniedad1">Idoniedad y competencia </th>
+                                            <th scope="col" sortable="valor1">Valor</th>
+                                            <th scope="col">Opciones</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let c of this.coordinacionList">
+                                            <td>{{c.nombre}}</td>
+                                            <td>{{c.perfil}}</td>
+                                            <td>{{c.idoneidadCompetencia}}</td>
+                                            <td>{{c.valorTotal}}</td>
+                                            <td>
+                                                <button type="button" class="btn btn-primary"
+                                                    (click)="actualizarCoordinacion(registrarCoordinacion, c)">
+                                                    <i class="fas fa-plus-circle mx-1"></i> Editar
+                                                </button>
+                                            </td>
+                                        </tr>
+
+                                    </tbody>
+                                </table>
+                            </ng-template>
+                        </li>
+                    </ul>
+
+                    <div [ngbNavOutlet]="nav" class="mt-2"></div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+</ng-template>
+
+
+
+
+
+<ng-template #gastosGeneral let-c="close" let-d="dismiss">
+    <div class="modal-header">
+        <h4 class="modal-title">Gastos Generales</h4>
+        <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-body">
+                        <nav ngbNav #nav="ngbNav" class="nav-tabs">
+                            <ng-container ngbNavItem>
+                                <a ngbNavLink>Apoyo logistico</a>
+                                <ng-template ngbNavContent>
+
+                                    <button type="button" class="btn btn-primary"
+                                        (click)="registrarApoyo(apoyoLogistico)">
+                                        <i class="fas fa-plus-circle mx-1"></i> Agregar Item
+                                    </button>
+
+                                    <table *ngIf="this.apoyosLogisticosList.length>0" datatable
+                                        [dtOptions]="[numero1, actividad1, valor1]"
+                                        class="table table-striped table-bordered row-border hover">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col" sortable="numero1" (sort)="onSort($event)">Numero</th>
+                                                <th scope="col" sortable="actividad1" (sort)="onSort($event)">Actividad
+                                                </th>
+                                                <th scope="col" sortable="valor1" (sort)="onSort($event)">Valor</th>
+                                                <th scope="col" (sort)="onSort($event)">Opciones</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr *ngFor="let a of this.apoyosLogisticosList">
+                                                <td>{{a.numero}}</td>
+                                                <td>{{a.actividad}}</td>
+                                                <td>{{a.valorTotal}}</td>
+                                                <td>
+                                                    <button type="button" class="btn btn-primary"
+                                                        (click)="actualizarApoyo(apoyoLogistico, a)">
+                                                        <i class="fas fa-plus-circle mx-1"></i> editar
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </ng-template>
+                            </ng-container>
+                            <ng-container ngbNavItem>
+                                <a ngbNavLink>Materiales y suminstros</a>
+                                <ng-template ngbNavContent>
+                                    <button type="button" class="btn btn-primary"
+                                        (click)="registrarMateria(materialesSuministros)">
+                                        <i class="fas fa-plus-circle mx-1"></i> Agregar Item
+                                    </button>
+                                    <table datatable [dtOptions]="[tipo, numero1,cantidad, valor1]"
+                                        class="table table-striped table-bordered row-border hover"
+                                        *ngIf="this.materiaSumList.length>0">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col" sortable="tipo" (sort)="onSort($event)">Tipo Material
+                                                </th>
+                                                <th scope="col" sortable="tipo" (sort)="onSort($event)">Numero
+                                                </th>
+                                                <th scope="col" sortable="bien" (sort)="onSort($event)">Bien o servicio
+                                                </th>
+                                                <th scope="col" sortable="cantidad" (sort)="onSort($event)">cantidad
+                                                </th>
+                                                <th scope="col" sortable="valor1" (sort)="onSort($event)">Valor</th>
+                                                <th scope="col" (sort)="onSort($event)">Opciones</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr *ngFor="let m of this.materiaSumList">
+                                                <td>{{m.tipo}}</td>
+                                                <td>{{m.numero}}</td>
+                                                <td>{{m.bien}}</td>
+                                                <td>{{m.cantidad}}</td>
+                                                <td>{{m.valorUnitario}}</td>
+                                                <td>
+                                                    <button type="button" class="btn btn-primary"
+                                                        (click)="editar(materialesSuministros, m)">
+                                                        <i class="fas fa-plus-circle mx-1"></i> Editar
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </ng-template>
+                            </ng-container>
+                            <ng-container ngbNavItem>
+                                <a ngbNavLink>Impresiones y publicaciones</a>
+                                <ng-template ngbNavContent>
+                                    <button type="button" class="btn btn-primary"
+                                        (click)="registrarImpresion(impresion)">
+                                        <i class="fas fa-plus-circle mx-1"></i> Agregar Item
+                                    </button>
+                                    <table datatable [dtOptions]="[numero, publicacion,cantidad, valor1, valor2]"
+                                        class="table table-striped table-bordered row-border hover"
+                                        *ngIf="this.impresionList.length>0">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col" sortable="publicacion" (sort)="onSort($event)">Numero
+                                                </th>
+                                                <th scope="col" sortable="numero" (sort)="onSort($event)">Publicacion
+                                                </th>
+                                                <th scope="col" sortable="cantidad" (sort)="onSort($event)">cantidad
+                                                </th>
+                                                <th scope="col" sortable="valor1" (sort)="onSort($event)">Valor unitario
+                                                </th>
+                                                <th scope="col" sortable="valor2" (sort)="onSort($event)">Valor Total
+                                                </th>
+                                                <th scope="col" (sort)="onSort($event)">Opciones</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr *ngFor="let i of this.impresionList">
+                                                <td>{{i.numero}}</td>
+                                                <td>{{i.publicacion}}</td>
+                                                <td>{{i.cantidad}}</td>
+                                                <td>{{i.valorUnitario}}</td>
+                                                <td>{{i.valorTotal}}</td>
+                                                <td>
+                                                    <button type="button" class="btn btn-primary"
+                                                        (click)="actualizarImpresion(impresion, i)">
+                                                        <i class="fas fa-plus-circle mx-1"></i> Editar
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </ng-template>
+                            </ng-container>
+                        </nav>
+
+                        <div [ngbNavOutlet]="nav" class="mt-2"></div>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+</ng-template>
+
+<ng-template #otrosGastos let-c="close" let-d="dismiss">
+    <div class="modal-header">
+        <h4 class="modal-title">Otros Gastos</h4>
+        <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-body">
+                        <nav ngbNav #nav="ngbNav" class="nav-tabs">
+                            <ng-container ngbNavItem>
+                                <a ngbNavLink>Alquiler de aulas</a>
+                                <ng-template ngbNavContent>
+
+                                    <button type="button" class="btn btn-primary"
+                                        (click)="registrarAlquilerAulas(alquilerAulas)">
+                                        <i class="fas fa-plus-circle mx-1"></i> Agregar Item
+                                    </button>
+
+                                    <table *ngIf="this.aulaList.length>0" datatable
+                                        [dtOptions]="[dependencia, cantidad, valor1, valor2, numero]"
+                                        class="table table-striped table-bordered row-border hover">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col" sortable="numero" (sort)="onSort($event)">Numero</th>
+                                                <th scope="col" sortable="dependencia" (sort)="onSort($event)">
+                                                    Dependencia Que Presta el servicio</th>
+                                                <th scope="col" sortable="cantidad" (sort)="onSort($event)">cantidad
+                                                </th>
+                                                <th scope="col" sortable="valor1" (sort)="onSort($event)">Valor unitario
+                                                </th>
+                                                <th scope="col" sortable="valor2" (sort)="onSort($event)">Valor Total
+                                                </th>
+                                                <th scope="col" (sort)="onSort($event)">Opciones</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr *ngFor="let au of this.aulaList">
+                                                <td>{{au.numero}}</td>
+                                                <td>{{au.dependenciaPrestaServicio}}</td>
+                                                <td>{{au.cantidad}}</td>
+                                                <td>{{au.valorUnitario}}</td>
+                                                <td>{{au.valorTotal}}</td>
+                                                <td>
+                                                    <button type="button" class="btn btn-primary"
+                                                        (click)="editarAlquilerAulas(alquilerAulas,au)">
+                                                        <i class="fas fa-plus-circle mx-1"></i> Editar
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </ng-template>
+                            </ng-container>
+
+                            <ng-container ngbNavItem>
+                                <a ngbNavLink>Otros</a>
+                                <ng-template ngbNavContent>
+                                    <button type="button" class="btn btn-primary" (click)="registrarOtros(otros)">
+                                        <i class="fas fa-plus-circle mx-1"></i> Agregar Item
+                                    </button>
+                                    <table *ngIf="this.otrosList.length>0" datatable [dtOptions]="[descripcion, valor1]"
+                                        class="table table-striped table-bordered row-border hover">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col" sortable="numero" (sort)="onSort($event)">Numero</th>
+                                                <th scope="col" sortable="descripcion" (sort)="onSort($event)">
+                                                    Descripcion Detallada</th>
+                                                <th scope="col" sortable="valor1" (sort)="onSort($event)">Valor</th>
+                                                <th scope="col" (sort)="onSort($event)">Opciones</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr *ngFor="let o of this.otrosList">
+                                                <td>{{o.numero}}</td>
+                                                <td>{{o.descripcion}}</td>
+                                                <td>{{o.valorTotal}}</td>
+                                                <td>
+                                                    <button type="button" class="btn btn-primary"
+                                                        (click)="actualizarOtros(otros, o)">
+                                                        <i class="fas fa-plus-circle mx-1"></i> Editar
+                                                    </button>
+                                                </td>
+                                            </tr>
+
+                                        </tbody>
+                                    </table>
+                                </ng-template>
+                            </ng-container>
+                        </nav>
+
+                        <div [ngbNavOutlet]="nav" class="mt-2"></div>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+</ng-template>
+
+
+
+<ng-template #registrarHonorario let-c="close" let-d="dismiss">
+    <div class="modal-header">
+        <h4 class="modal-title">Honorarios</h4>
+        <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-body">
+                        <form style="padding-top: 15px" #honorarioFormView="ngForm" [formGroup]="honorarioForm"
+                            (ngSubmit)="onSubmitHonorarioForm()">
+                            <div class="row">
+                                <div class="col-md-4 pr-1">
+                                    <div class="form-group">
+                                        <label>Nombre del docente</label>
+                                        <div>
+                                            <input type="text" class="ng-dirty ng-invalid"
+                                                formControlName="nombreDocente"
+                                                (change)="_generals.clearSpaceStartAndEnd($event)" pInputText
+                                                oninput="this.value=this.value.toLowerCase();" #name>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-4 pr-1">
+                                    <div class="form-group">
+                                        <label>Escolaridad</label>
+                                        <div>
+                                            <input type="text" class="ng-dirty ng-invalid" formControlName="escolaridad"
+                                                (change)="_generals.clearSpaceStartAndEnd($event)" pInputText
+                                                oninput="this.value=this.value.toLowerCase();" #name>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4 pr-1">
+                                    <div class="form-group">
+                                        <label>Ecalafon</label>
+                                        <div>
+                                            <input type="text" class="ng-dirty ng-invalid" formControlName="escalafon"
+                                                (change)="_generals.clearSpaceStartAndEnd($event)" pInputText
+                                                oninput="this.value=this.value.toLowerCase();" #name>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 pr-1">
+                                    <div class="form-group">
+                                        <label>Puntaje</label>
+                                        <div>
+                                            <input type="number" class="ng-dirty ng-invalid" formControlName="puntaje">
+                                        </div>
+
+
+                                    </div>
+                                </div>
+                                <div class="col-md-4 pr-1">
+                                    <div class="form-group">
+                                        <label>Valor puntos</label>
+
+                                        <input type="number" class="ng-dirty ng-invalid" formControlName="valorPunto">
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4 pr-1">
+                                    <div class="form-group">
+
+                                        <label>Valor Hora</label>
+                                        <div>
+                                            <input type="number" class="ng-dirty ng-invalid"
+                                                formControlName="valorHora">
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="col-md-4 pr-1">
+                                    <div class="form-group">
+
+                                        <label>Numero de Horas</label>
+                                        <div>
+                                            <input type="number" class="ng-dirty ng-invalid"
+                                                formControlName="cantidadHora">
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                        </form>
+
+                        <footer>
+                            <div>
+                                <button type="button" class="btn btn-danger" (click)="d('Cross click')">
+                                    Cancelar</button>
+                                <button type="button" (click)="onSubmitHonorarioForm(d('Cross click'))"
+                                    class="btn btn-danger">Guardar</button>
+                            </div>
+                        </footer>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+</ng-template>
+
+<ng-template #registrarCoordinacion let-c="close" let-d="dismiss">
+    <div class="modal-header">
+        <h4 class="modal-title">Coordinador</h4>
+        <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-body">
+                        <form style="padding-top: 15px" #coordinacionFormView="ngForm" [formGroup]="coordinacionForm"
+                            (ngSubmit)="activeSubmitCoordinacionForm()">
+                            <div class="row">
+                                <div class="col-md-4 pr-1">
+                                    <div class="form-group">
+                                        <label>Nombre del coordinador</label>
+                                        <div>
+                                            <input type="text" class="ng-dirty ng-invalid" formControlName="nombre"
+                                                (change)="_generals.clearSpaceStartAndEnd($event)" pInputText
+                                                oninput="this.value=this.value.toLowerCase();" #name>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4 pr-1">
+                                    <div class="form-group">
+                                        <label>perfil</label>
+                                        <div>
+                                            <input type="text" class="ng-dirty ng-invalid" formControlName="perfil"
+                                                (change)="_generals.clearSpaceStartAndEnd($event)" pInputText
+                                                oninput="this.value=this.value.toLowerCase();" #name>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4 pr-1">
+                                    <div class="form-group">
+
+                                        <label>Idoniedad</label>
+                                        <div>
+                                            <input type="text" class="ng-dirty ng-invalid"
+                                                formControlName="idoneidadCompetencia"
+                                                (change)="_generals.clearSpaceStartAndEnd($event)" pInputText
+                                                oninput="this.value=this.value.toLowerCase();" #name>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4 pr-1">
+                                    <div class="form-group">
+
+                                        <label>valor</label>
+                                        <div>
+                                            <input type="number" class="ng-dirty ng-invalid"
+                                                formControlName="valorTotal">
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </form>
+
+                        <footer>
+                            <div>
+                                <button type="button" class="btn btn-danger" (click)="d('Cross click')">
+                                    Cancelar</button>
+                                <button type="button" (click)="activeSubmitCoordinacionForm(d('Cross click'))"
+                                    class="btn btn-danger">Guardar</button>
+                            </div>
+                        </footer>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+</ng-template>
+
+
+
+<ng-template #registrarHonorario let-c="close" let-d="dismiss">
+    <div class="modal-header">
+        <h4 class="modal-title">Honorarios</h4>
+        <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-body">
+                        <form style="padding-top: 15px" #honorarioFormView="ngForm" [formGroup]="honorarioForm"
+                            (ngSubmit)="onSubmitHonorarioForm()">
+                            <div class="row">
+                                <div class="col-md-4 pr-1">
+                                    <div class="form-group">
+                                        <label>Nombre del docente</label>
+                                        <div>
+                                            <input type="text" class="ng-dirty ng-invalid"
+                                                formControlName="nombreDocente"
+                                                (change)="_generals.clearSpaceStartAndEnd($event)" pInputText
+                                                oninput="this.value=this.value.toLowerCase();" #name>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-4 pr-1">
+                                    <div class="form-group">
+                                        <label>Escolaridad</label>
+                                        <div>
+                                            <input type="text" class="ng-dirty ng-invalid" formControlName="escolaridad"
+                                                (change)="_generals.clearSpaceStartAndEnd($event)" pInputText
+                                                oninput="this.value=this.value.toLowerCase();" #name>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4 pr-1">
+                                    <div class="form-group">
+                                        <label>Valor puntos</label>
+
+                                        <input type="number" class="ng-dirty ng-invalid" formControlName="valorPunto">
+
+                                    </div>
+                                </div>
+                                <div class="col-md-4 pr-1">
+                                    <div class="form-group">
+                                        <label>Valor puntos</label>
+
+                                        <input type="number" class="ng-dirty ng-invalid" formControlName="valorPunto">
+
+                                    </div>
+                                </div>
+                                <div class="col-md-4 pr-1">
+                                    <div class="form-group">
+                                        <label>Valor puntos</label>
+
+                                        <input type="number" class="ng-dirty ng-invalid" formControlName="valorPunto">
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4 pr-1">
+                                    <div class="form-group">
+
+                                        <label>Valor Hora</label>
+                                        <div>
+                                            <input type="number" class="ng-dirty ng-invalid"
+                                                formControlName="valorHora">
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="col-md-4 pr-1">
+                                    <div class="form-group">
+
+                                        <label>Numero de Horas</label>
+                                        <div>
+                                            <input type="number" class="ng-dirty ng-invalid"
+                                                formControlName="numeroHora">
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                        </form>
+
+                        <footer>
+                            <div>
+                                <button type="button" class="btn btn-danger" (click)="d('Cross click')">
+                                    Cancelar</button>
+                                <button type="button" (click)="activeSubmitItemIngresoForm(registrarHonorario)"
+                                    class="btn btn-danger">Guardar</button>
+                            </div>
+                        </footer>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+</ng-template>
+
+<ng-template #apoyoLogistico let-c="close" let-d="dismiss">
+    <div class="modal-header">
+        <h4 class="modal-title">Apoyo Logistico</h4>
+        <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-body">
+                        <form style="padding-top: 15px" #apoyoLogisticoFormView="ngForm"
+                            [formGroup]="apoyoLogisticoForm" (ngSubmit)="activeSubmitApoyoLogisticoForm()">
+                            <div class="row">
+                                <div class="col-md-4 pr-1">
+                                    <div class="form-group">
+                                        <label>Numero</label>
+                                        <div>
+                                            <input type="number" class="ng-dirty ng-invalid" formControlName="numero"
+                                                required>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4 pr-1">
+                                    <div class="form-group">
+                                        <label>Actividad</label>
+                                        <div>
+                                            <input type="text" class="ng-dirty ng-invalid" formControlName="actividad"
+                                                (change)="_generals.clearSpaceStartAndEnd($event)" pInputText required
+                                                oninput="this.value=this.value.toLowerCase();" #name>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4 pr-1">
+                                    <div class="form-group">
+
+                                        <label>Valor Total</label>
+                                        <div>
+                                            <input type="number" class="ng-dirty ng-invalid"
+                                                formControlName="valorTotal" pInputText required>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </form>
+
+                        <footer>
+                            <div>
+                                <button type="button" class="btn btn-danger" (click)="d('Cross click')">
+                                    Cancelar</button>
+                                <button type="button" (click)="activeSubmitApoyoLogisticoForm(d('Cross click'))"
+                                    class="btn btn-danger">Guardar</button>
+                            </div>
+                        </footer>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</ng-template>
+
+
+
+<ng-template #materialesSuministros let-c="close" let-d="dismiss">
+    <div class="modal-header">
+        <h4 class="modal-title">Materiales y suministro</h4>
+        <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-body">
+                        <form style="padding-top: 15px" #materialFormView="ngForm" [formGroup]="materialForm"
+                            (ngSubmit)="activeSubmitMaterialForm()">
+                            <div class="row">
+                                <div class="col-md-4 pr-1">
+                                    <div class="form-group">
+                                        <label>Tipo</label>
+                                        <div>
+                                            <select class="ng-dirty ng-invalid form-control" formControlName="tipo"
+                                                (change)="_generals.clearSpaceStartAndEnd($event)" pInputText required
+                                                oninput="this.value=this.value.toLowerCase();" #name>
+                                                <option>
+                                                    Material de didactico
+                                                </option>
+                                                <option>
+                                                    Material de consumo
+                                                </option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4 pr-1">
+                                    <div class="form-group">
+                                        <label>Numero</label>
+                                        <div>
+                                            <input type="number" class="ng-dirty ng-invalid" formControlName="numero"
+                                                pInputText required>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4 pr-1">
+                                    <div class="form-group">
+
+                                        <label>Bien o Servicio</label>
+                                        <div>
+                                            <input type="text" class="ng-dirty ng-invalid" formControlName="bien"
+                                                (change)="_generals.clearSpaceStartAndEnd($event)" pInputText
+                                                oninput="this.value=this.value.toLowerCase();" #name>
+                                        </div>
+
+
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4 pr-1">
+                                    <div class="form-group">
+                                        <label>Cantidad</label>
+                                        <div>
+                                            <input type="number" class="ng-dirty ng-invalid" formControlName="cantidad"
+                                                pInputText required>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4 pr-1">
+                                    <div class="form-group">
+
+                                        <label>Valor unitario</label>
+                                        <div>
+                                            <input type="number" class="ng-dirty ng-invalid"
+                                                formControlName="valorUnitario" pInputText required>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </form>
+
+                        <footer>
+                            <div>
+                                <button type="button" class="btn btn-danger" (click)="d('Cross click')">
+                                    Cancelar</button>
+                                <button type="button" (click)="activeSubmitMaterialForm(d('Cross click'))"
+                                    class="btn btn-danger">Guardar</button>
+                            </div>
+                        </footer>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</ng-template>
+
+
+<ng-template #impresion let-c="close" let-d="dismiss">
+    <div class="modal-header">
+        <h4 class="modal-title">Impresiones</h4>
+        <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-body">
+                        <form style="padding-top: 15px" #impresionFormView="ngForm" [formGroup]="impresionForm"
+                            (ngSubmit)="activeSubmitImpresionForm()">
+                            <div class="row">
+                                <div class="col-md-4 pr-1">
+                                    <div class="form-group">
+                                        <label>numero</label>
+                                        <div>
+                                            <div>
+                                                <input type="number" class="ng-dirty ng-invalid"
+                                                    formControlName="numero"
+                                                    (change)="_generals.clearSpaceStartAndEnd($event)" pInputText
+                                                    oninput="this.value=this.value.toLowerCase();" #name>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4 pr-1">
+                                    <div class="form-group">
+                                        <label>Publicacion</label>
+                                        <div>
+                                            <div>
+                                                <input type="text" class="ng-dirty ng-invalid"
+                                                    formControlName="publicacion"
+                                                    (change)="_generals.clearSpaceStartAndEnd($event)" pInputText
+                                                    oninput="this.value=this.value.toLowerCase();" #name>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4 pr-1">
+                                    <div class="form-group">
+                                        <label>Cantidad</label>
+                                        <div>
+                                            <input type="number" class="ng-dirty ng-invalid" formControlName="cantidad"
+                                                pInputText required>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4 pr-1">
+                                    <div class="form-group">
+
+                                        <label>Valor unitario</label>
+                                        <div>
+                                            <input type="number" class="ng-dirty ng-invalid"
+                                                formControlName="valorUnitario" pInputText required>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </form>
+
+                        <footer>
+                            <div>
+                                <button type="button" class="btn btn-danger" (click)="d('Cross click')">
+                                    Cancelar</button>
+                                <button type="button" (click)="activeSubmitImpresionForm(d('Cross click'))"
+                                    class="btn btn-danger">Guardar</button>
+                            </div>
+                        </footer>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</ng-template>
+
+
+<ng-template #alquilerAulas let-c="close" let-d="dismiss">
+    <div class="modal-header">
+        <h4 class="modal-title">Alquiler de Aulas</h4>
+        <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-body">
+                        <form style="padding-top: 15px" #aulaFormView="ngForm" [formGroup]="aulaForm"
+                            (ngSubmit)="activeSubmitAulaForm()">
+                            <div class="row">
+                                <div class="col-md-4 pr-1">
+                                    <div class="form-group">
+                                        <label>Numero</label>
+                                        <div>
+                                            <input type="number" class="ng-dirty ng-invalid" formControlName="numero"
+                                                pInputText required>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4 pr-1">
+                                    <div class="form-group">
+                                        <label>Dependencia</label>
+                                        <div>
+                                            <div>
+                                                <input type="text" class="ng-dirty ng-invalid"
+                                                    formControlName="dependenciaPrestaServicio"
+                                                    (change)="_generals.clearSpaceStartAndEnd($event)" pInputText
+                                                    oninput="this.value=this.value.toLowerCase();" #name>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4 pr-1">
+                                    <div class="form-group">
+                                        <label>Cantidad</label>
+                                        <div>
+                                            <input type="number" class="ng-dirty ng-invalid" formControlName="cantidad"
+                                                pInputText required>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4 pr-1">
+                                    <div class="form-group">
+
+                                        <label>Valor unitario</label>
+                                        <div>
+                                            <input type="number" class="ng-dirty ng-invalid"
+                                                formControlName="valorUnitario" pInputText required>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </form>
+
+                        <footer>
+                            <div>
+                                <button type="button" class="btn btn-danger" (click)="d('Cross click')">
+                                    Cancelar</button>
+                                <button type="button" (click)="activeSubmitAulaForm(d('Cross click'))"
+                                    class="btn btn-danger">Guardar</button>
+                            </div>
+                        </footer>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</ng-template>
+
+
+<ng-template #otros let-c="close" let-d="dismiss">
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Gastos No Mencionados</h4>
+        <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-body">
+                        <form style="padding-top: 15px" #otrosFormView="ngForm" [formGroup]="otrosForm"
+                            (ngSubmit)="activeSubmitotrosForm(otros)">
+                            <div class="row">
+                                <div class="col-md-4 pr-1">
+                                    <div class="form-group">
+
+                                        <label>Numero</label>
+                                        <div>
+                                            <input type="number" class="ng-dirty ng-invalid" formControlName="numero"
+                                                pInputText required>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4 pr-1">
+                                    <div class="form-group">
+                                        <label>Descripcion</label>
+                                        <div>
+                                            <div>
+                                                <input type="text" class="ng-dirty ng-invalid"
+                                                    formControlName="descripcion"
+                                                    (change)="_generals.clearSpaceStartAndEnd($event)" pInputText
+                                                    oninput="this.value=this.value.toLowerCase();" #name>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4 pr-1">
+                                    <div class="form-group">
+
+                                        <label>Valor Total</label>
+                                        <div>
+                                            <input type="number" class="ng-dirty ng-invalid"
+                                                formControlName="valorTotal" pInputText required>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </form>
+
+                        <footer>
+                            <div>
+                                <button type="button" class="btn btn-danger" (click)="d('Cross click')">
+                                    Cancelar</button>
+                                <button type="button" (click)="activeSubmitotrosForm(d('Cross guardar'))"
+                                    class="btn btn-danger">Guardar</button>
+                            </div>
+                        </footer>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</ng-template>

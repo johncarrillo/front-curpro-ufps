@@ -1,0 +1,99 @@
+<app-navbar></app-navbar>
+<div class="panel-header panel-header-sm">
+</div>
+<div class="main-content">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="title">Mis Cursos</h5>
+                    </div>
+                    <div class="card-body">
+
+                        <table datatable class="table table-striped table-bordered row-border hover">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Tipo</th>
+                                    <th scope="col">Nombre</th>
+                                    <th scope="col">Dependencia</th>
+                                    <th scope="col">Estado</th>
+                                    <th scope="col">Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Curso de Profundizacion</td>
+                                    <td>curso de sw</td>
+                                    <td>Ingenieria de sistemas</td>
+                                    <td>Inscripciones</td>
+                                    <td>
+                                        <button type="button" class="btn btn-primary" (click)="openSm(content, usu)">
+                                            <i class="fas fa-list mx-1"></i> Ver Notas
+                                        </button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Curso Corto</td>
+                                    <td>Mantenimiento de Pc</td>
+                                    <td>Ingenieria de sistemas</td>
+                                    <td>En curso</td>
+                                    <td>
+                                        <button type="button" class="btn btn-primary" (click)="openSm(verNotas, 1)">
+                                            <i class="fas fa-list mx-1"></i> Ver Notas
+                                        </button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<ng-template #verNotas let-c="close" let-d="dismiss">
+    <div class="modal-header">
+        <h4 class="modal-title">Notas</h4>
+        <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-body">
+                        <table datatable class="table table-striped table-bordered row-border hover">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Nombre</th>
+                                    <th scope="col">Modulo 1</th>
+                                    <th scope="col">Modulo 2</th>
+                                    <th scope="col">Modulo 3</th>
+                                    <th scope="col">Sustentacion</th>
+                                    <th scope="col">Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Juanito</td>
+                                    <td>4</td>
+                                    <td>4</td>
+                                    <td>4</td>
+                                    <td>4</td>
+                                    <td>
+                                        <button type="button" class="btn btn-primary" (click)="openSm(content, usu)">
+                                            <i class="fas fa-list mx-1"></i> Descargar Acta
+                                        </button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</ng-template>

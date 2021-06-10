@@ -1,0 +1,175 @@
+<div class="main-content">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-body">
+          <button type="button" class="btn btn-primary" (click)="registrar(content1)">
+            <i class="fas fa-plus-circle mx-1"></i> Registrar Ingreso</button>
+
+          <table datatable [dtOptions]="[concepto, valor]" class="table table-striped table-bordered row-border hover">
+            <thead>
+              <tr>
+                <th scope="col">Tipo Participante</th>
+                <th scope="col">Cantidad</th>
+                <th scope="col">Valor Unitario</th>
+                <th scope="col">Valor Total</th>
+                <th scope="col">Opciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let ing of this.inscripcionMatriculaList">
+                <td>{{ing.tipoParticipante}}</td>
+                <td>{{ing.cantidad}}</td>
+                <td>{{ing.valorUnitario}}</td>
+                <td>{{ing.valorTotal}}</td>
+                <td>
+                  <button type="button" class="btn btn-primary" (click)="actualizar(content1, ing)">
+                    <i class="fas fa-plus-circle mx-1"></i> Editar
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #content let-c="close" let-d="dismiss">
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Detalles Ingreso</h4>
+    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="main-content">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="card">
+            <div class="card-body">
+              <div>
+                <button type="button" class="btn btn-primary" (click)="registrar(content1)">
+                  <i class="fas fa-plus-circle mx-1"></i> Agregar Item
+                </button>
+              </div>
+              <table datatable [dtOptions]="[tipoProducto,numero, valorUnitario]"
+                class="table table-striped table-bordered row-border hover"
+                *ngIf="this.inscripcionMatriculaList.length>0">
+                <thead>
+                  <tr>
+                    <th scope="col" sortable="tipoProducto">Tipo de Participante</th>
+                    <th scope="col" sortable="numero">Numero</th>
+                    <th scope="col" sortable="valorUnitario">Valor Unitario</th>
+                    <th scope="col" sortable="valorUnitario">Valor Total</th>
+                    <th scope="col">Opciones</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let lma of this.inscripcionMatriculaList">
+                    <td>{{lma.tipoParticipante}}</td>
+                    <td>{{lma.cantidad}}</td>
+                    <td>{{lma.valorUnitario}}</td>
+                    <td>{{lma.cantidad* lma.valorUnitario}}</td>
+
+                    <td>
+                      <button type="button" class="btn btn-primary" (click)="actualizar(content1, lma)">
+                        <i class="fas fa-plus-circle mx-1"></i> editar
+                      </button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-primary" (click)="c('Save click')">Guardar</button>
+  </div>
+</ng-template>
+
+
+
+
+
+
+
+
+
+
+<ng-template #content1 let-c="close" let-d="dismiss">
+  <div class="modal-header">
+    <h4 class="modal-title">Registrar</h4>
+    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-body">
+            <form style="padding-top: 15px" #itemIngresoFormView="ngForm" [formGroup]="itemIngresoForm"
+              (ngSubmit)="onSubmitCursoForm()">
+              <div class="row">
+                <div class="col-md-12 pr-1">
+                  <div class="form-group">
+                    <label>Tipo Participante</label>
+                    <div>
+                      <input type="text" class="ng-dirty ng-invalid" formControlName="tipoParticipante"
+                        (change)="_generals.clearSpaceStartAndEnd($event)" pInputText
+                        oninput="this.value=this.value.toLowerCase();" #name>
+                      </div>
+                  </div>
+                </div>
+
+              </div>
+              <div class="row">
+                <div class="col-md-12 pr-1">
+                  <div class="form-group">
+                    <label>Numero Participantes</label>
+                    <div clas="col-md-12 ">
+                      <input type="number" class="ng-dirty ng-invalid" formControlName="cantidad"
+                        (change)="_generals.clearSpaceStartAndEnd($event)" pInputText required
+                        oninput="this.value=this.value.toLowerCase();" #name>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="form-group">
+
+                    <label>Valor Por Participante</label>
+                    <div>
+                      <input type="number" class="ng-dirty ng-invalid" formControlName="valorUnitario"
+                        (change)="_generals.clearSpaceStartAndEnd($event)" pInputText required
+                        oninput="this.value=this.value.toLowerCase();" #name>
+                    </div>
+
+
+                  </div>
+                </div>
+              </div>
+
+            </form>
+            <footer>
+              <div>
+                <button type="button" class="btn btn-danger" (click)="d('Cross click')"> Cancelar</button>
+                <button type="button" (click)="activeSubmitItemIngresoForm(d('Cross click'), content)"
+                  class="btn btn-danger">Guardar</button>
+              </div>
+            </footer>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+
+</ng-template>

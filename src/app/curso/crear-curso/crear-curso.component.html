@@ -1,0 +1,237 @@
+<app-navbar></app-navbar>
+<div class="panel-header panel-header-sm">
+</div>
+<div class="main-content">
+  <div class="row">
+    <div class="col-md-8">
+      <div class="card">
+        <div class="card-header">
+          <h5 class="title">Registrar Curso</h5>
+        </div>
+        <div class="card-body">
+          <ngb-accordion #a="ngbAccordion" activeIds="custom-panel-1">
+            <ngb-panel id="custom-panel-1">
+              <ng-template ngbPanelHeader let-opened="opened">
+                <div class="d-flex align-items-center justify-content-between">
+
+                  <h5 class="m-0">Informacion General </h5>
+                  <button ngbPanelToggle class="btn btn-primary p-0">Mostrar</button>
+                </div>
+              </ng-template>
+              <ng-template ngbPanelContent>
+                <form style="padding-top: 15px" #cursoFormView="ngForm" [formGroup]="cursoForm"
+                  (ngSubmit)="onSubmitCursoForm()">
+                  <div class="row">
+                    <div class="col-md- pr-1">
+                      <div class="form-group">
+                        <label>Tipo de oferta</label>
+                        <div class="col-12">
+                          <select class="ng-dirty ng-invalid form-control" formControlName="idTipoCurso"
+                            (change)="_generals.clearSpaceStartAndEnd($event)" pInputText required
+                            oninput="this.value=this.value.toLowerCase();" #name>
+                            <option *ngFor="let tipo of tiposOfertas" value={{tipo.value}}>
+                              {{tipo.label}}
+                            </option>
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-5 px-1">
+                      <div class="form-group">
+                        <label>¿Otro tipo?</label>
+                        <div>
+                          <input type="text" class="ng-dirty ng-invalid" formControlName="otroTipoCurso"
+                            (change)="_generals.clearSpaceStartAndEnd($event)" pInputText
+                            oninput="this.value=this.value.toLowerCase();" #name>
+                        </div>
+                      </div>
+                    </div>
+
+                  </div>
+                  <div class="row">
+                    <div class="col-md-12 pr-1">
+                      <div class="form-group">
+                        <label>Nombre de la oferta</label>
+                        <div clas="col-md-12 ">
+                          <input type="text" class="ng-dirty ng-invalid" formControlName="nombre"
+                            (change)="_generals.clearSpaceStartAndEnd($event)" pInputText required
+                            oninput="this.value=this.value.toLowerCase();" #name>
+                        </div>
+                      </div>
+                    </div>
+
+                  </div>
+
+                  <div class="row">
+                    <div class="col-6 ">
+                      <div class="form-group">
+                        <label>Fecha Inicio</label>
+                        <div class="col-12">
+                          <div class="input-group">
+                            <input id="dateOfBirth" class="form-control calendar" placeholder="aaaa/mm/dd" name="dp"
+                              ngbDatepicker #dp="ngbDatepicker" (click)="dp.toggle()" formControlName="fechaInicio">
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-5 px-1">
+                      <div class="form-group">
+                        <label>Fecha Terminacion</label>
+                        <div class="col-12">
+                          <div class="input-group">
+                            <input id="dateOfBirth" class="form-control calendar" placeholder="aaaa/mm/dd" name="df"
+                              ngbDatepicker #df="ngbDatepicker" (click)="df.toggle()" formControlName="fechaFin">
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-5 px-1">
+                      <div class="form-group">
+                        <label>Fecha Limite de pago de matricula</label>
+                        <div class="col-12">
+                          <div class="input-group">
+                            <input id="dateOfBirth" class="form-control calendar" placeholder="aaaa/mm/dd" name="flpm"
+                              ngbDatepicker #flpm="ngbDatepicker" (click)="flpm.toggle()"
+                              formControlName="fechaLimitePago">
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="col-md-5 px-1">
+                      <div class="form-group">
+                        <label>Fecha Limite de Retiro</label>
+                        <div class="col-12">
+                          <div class="input-group">
+                            <input id="dateOfBirth" class="form-control calendar" placeholder="aaaa/mm/dd" name="flr"
+                              ngbDatepicker #flr="ngbDatepicker" (click)="flr.toggle()"
+                              formControlName="fechaLimiteRetiro">
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-6">
+                      <div class="form-group">
+                        <label>Cantidad Horas</label>
+                        <div class="col-12">
+                          <div class="input-group">
+                            <input type="number" formControlName="cantidadHoras">
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                  </div>
+                  <div class="row">
+                  </div>
+
+                  <div class="row">
+                    <div class="col-md-4 pr-1">
+                      <div class="form-group">
+                        <label>Imagen</label>
+                        <div>
+                          <button mat-raised-button id="selectButton" class="btn btn-danger" (click)="fileInput.click()">Seleccione un
+                            archivo</button>
+                          <input type="file" #fileInput hidden (change)="selectFile($event)">
+                          <span *ngIf="this.cursoForm.get('imagen')">
+                            {{this.cursoForm.get('imagen').value}}
+                          </span>
+                        </div>
+
+                      </div>
+                    </div>
+                    <div class="col-md-4 px-1">
+                      <div class="form-group ui-float-label ui-g-12 ui-md-6">
+                        <label>Descripcion</label>
+                        <textarea class="let" lowercase pInputTextarea style="width: 100%; margin-top: 20px;" pInputText
+                          id="float3-input" class="ng-dirty ng-invalid" formControlName="descripcion"
+                          (change)="_generals.clearSpaceStartAndEnd($event)" pInputText required
+                          oninput="this.value=this.value.toLowerCase();" #name>
+
+                  </textarea>
+                      </div>
+                    </div>
+
+                  </div>
+                </form>
+                <footer>
+                  <div>
+                    <button type="button" class="btn btn-danger" (click)="displayAlly=false"> Cancelar</button>
+                    <button type="button" (click)="activeSubmitCursoForm()" class="btn btn-danger">Guardar</button>
+                  </div>
+                </footer>
+              </ng-template>
+            </ngb-panel>
+            <ngb-panel>
+              <ng-template ngbPanelHeader>
+                <div class="d-flex align-items-center justify-content-between">
+                  <h5 class="m-0">Presupuesto </h5>
+                  <div>
+                    <button ngbPanelToggle class="btn btn-sm btn-primary ml-2">Mostrar</button>
+
+                  </div>
+                </div>
+              </ng-template>
+              <ng-template ngbPanelContent>
+                <ul ngbNav #nav="ngbNav" [(activeId)]="active" class="nav-tabs">
+                  <li [ngbNavItem]="1">
+                    <a ngbNavLink>Ingresos</a>
+                    <ng-template ngbNavContent>
+                      <app-ingreso (ingreso)="receiveIngreso($event)"></app-ingreso>
+                    </ng-template>
+                  </li>
+                  <li [ngbNavItem]="2">
+                    <a ngbNavLink>Gastos</a>
+                    <ng-template ngbNavContent>
+                      <app-gastos 
+                        (materialSum)="receiveMaterial($event)" 
+                        (honor)="receiveHonor($event)"
+                        (coordi)="receiveCoordinacion($event)" 
+                        (apoyo)="receiveApoyo($event)"
+                        (impre)="receiveImpresion($event)" 
+                        (aulas)="receiveAulas($event)"
+                        (otros)="receiveOtros($event)">
+                      </app-gastos>
+                    </ng-template>
+                  </li>
+                </ul>
+
+                <div [ngbNavOutlet]="nav" class="mt-2"></div>
+              </ng-template>
+              <footer>
+                <p>pppp</p>
+              </footer>
+            </ngb-panel>
+            <!--<ngb-panel >
+              <ng-template ngbPanelHeader>
+                <div class="d-flex align-items-center justify-content-between">
+                  <p><button ngbPanelToggle class="btn btn-primary container-fluid text-left pl-0">Cronograma</button>
+                  </p>
+
+                </div>
+              </ng-template >
+              <ng-template ngbPanelContent>
+                <app-cronograma></app-cronograma>
+              </ng-template>
+            </ngb-panel>
+            <ngb-panel >
+              <ng-template ngbPanelHeader>
+                <div class="d-flex align-items-center justify-content-between">
+                  <p><button ngbPanelToggle class="btn btn-primary container-fluid text-left pl-0">Modulos</button>
+                  </p>
+
+                </div>
+              </ng-template>
+              <ng-template ngbPanelContent>
+                <app-modulo></app-modulo>
+              </ng-template>
+            </ngb-panel>-->
+          </ngb-accordion>
+          <button class="btn btn-sm btn-primary" (click)="enviarFrie()">Enviar A Junta Frie</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

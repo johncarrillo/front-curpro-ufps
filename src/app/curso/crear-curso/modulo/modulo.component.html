@@ -1,0 +1,113 @@
+<div class="main-content">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="col-md-12">
+                        <button type="button" class="btn btn-primary" (click)="registrar(modulo)">
+                            <i class="fas fa-plus-circle mx-1"></i> Agregar Item
+                        </button>
+                    </div>
+
+                    <table datatable [dtOptions]="[nombre, profesor]"
+                        class="table table-striped table-bordered row-border hover">
+                        <thead>
+                            <tr>
+                                <th scope="col" sortable="nombre">Nombre del Modulo</th>
+                                <th scope="col" sortable="profesor">profesor</th>
+                                <th scope="col">Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let mod of modulos">
+                                <td>{{mod.nombreModulo}}</td>
+                                <td>{{mod.docenteModulo}}</td>
+                                <td>
+                                    <button type="button" class="btn btn-primary" (click)="editar(modulo, mod)">
+                                        <i class="fas fa-plus-circle mx-1"></i> editar
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<ng-template #modulo let-c="close" let-d="dismiss" let-modulo>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Registrar Modulos</h4>
+        <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-body">
+                        <form style="padding-top: 15px" #moduloFormView="ngForm" [formGroup]="moduloForm"
+                            (ngSubmit)="activeSubmitModuloForm(d('Cross guardar'))" let modul of modulo1>
+                            <div class="row">
+                                <div class="col-md-4 pr-1">
+                                    <div class="form-group">
+                                        <label>Nombre</label>
+                                        <div>
+                                            <div *ngIf='!editando'>
+                                                <input type="text" class="ng-dirty ng-invalid" formControlName="nombre"
+                                                    (change)="_generals.clearSpaceStartAndEnd($event)" pInputText
+                                                    oninput="this.value=this.value.toLowerCase();" #name>
+                                            </div>
+                                            <div *ngIf=editando >
+                                                <input type="text" class="form-control" placeholder="City" value="{{this.modulo1.nombreModulo}}">
+                                                
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4 pr-1">
+                                    <div class="form-group">
+
+                                        <label>Docente</label>
+                                        <div>
+                                            <select class="ng-dirty ng-invalid form-control" formControlName="profesor"
+                                                (change)="_generals.clearSpaceStartAndEnd($event)" pInputText required
+                                                oninput="this.value=this.value.toLowerCase();" #name>
+                                                <option>
+                                                    Pilar
+                                                </option>
+                                                <option>
+                                                    Janeth
+                                                </option>
+                                            </select>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </form>
+
+                        <footer>
+                            <div>
+                                <button type="button" class="btn btn-danger" (click)="d('Cross click')">
+                                    Cancelar</button>
+                                <button type="button" (click)="activeSubmitModuloForm(d('Cross guardar'))"
+                                    class="btn btn-danger">Guardar</button>
+                            </div>
+                        </footer>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</ng-template>

@@ -1,0 +1,89 @@
+<app-navbar></app-navbar>
+<div class="panel-header panel-header-sm">
+</div>
+<div class="main-content">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card">
+          <div class="card-header">
+            <h5 class="title">Notas del modulo</h5>
+          </div>
+          <div class="card-body">
+
+            <table datatable class="table table-striped table-bordered row-border hover">
+              <thead>
+                <tr>
+                  <th scope="col">Nombre</th>
+                  <th scope="col">Modulo 1</th> 
+                  <th scope="col">Modulo 2</th>
+                  <th scope="col">Modulo 3</th>
+                  <th scope="col">Sustentacion</th>
+                  <th scope="col">Definitiva</th>
+                  <th scope="col">Acciones</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Juan </td>
+                  <td><span class="badge bg-success mx-1" style="color: antiquewhite;">
+                      4.6
+                    </span></td>
+                  <td><span class="badge bg-warning mx-1" style="color: antiquewhite;">
+                      3.2
+                    </span></td>
+                  <td><span class="badge bg-primary mx-1" style="color: antiquewhite;">
+                      2.9
+                    </span></td>
+                  <td>
+                    <span class="badge bg-primary mx-1" style="color: antiquewhite;">
+                      2.9
+                    </span>
+                  </td>
+                  <td>
+                    <span class="badge bg-warning mx-1" style="color: antiquewhite;">
+                      3.2
+                    </span>
+                  </td>
+                  <td>
+                    <button type="button" class="btn btn-primary" (click)="openSm(content, usu)">
+                      <i class="fas fa-arrow-circle-up mx-1"></i> subir acta
+                    </button>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Juana </td>
+                  <td><span class="badge bg-success mx-1" style="color: antiquewhite;">
+                      4.0
+                    </span></td>
+                  <td><span class="badge bg-warning mx-1" style="color: antiquewhite;">
+                      3.0
+                    </span></td>
+                  <td><span class="badge bg-primary mx-1" style="color: antiquewhite;">
+                      2.9
+                    </span></td>
+                  <td>
+                    <span class="badge bg-primary mx-1" style="color: antiquewhite;">
+                      1.9
+                    </span>
+                  </td>
+                  <td>
+                    <span class="badge bg-primary mx-1" style="color: antiquewhite;">
+                      2.9
+                    </span>
+                  </td>
+                  <td>
+                    <button type="button" class="btn btn-primary mr-2"
+                      ngbTooltip="El estudiante no saco la nota minima de aprobacion del curso" placement="top">
+                      <i class="fas fa-info-circle mx-1"></i>
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

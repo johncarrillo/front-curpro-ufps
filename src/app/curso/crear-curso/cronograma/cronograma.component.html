@@ -1,0 +1,119 @@
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-body">
+                <form style="padding-top: 15px" #cronogramaFormView="ngForm" [formGroup]="cronogramaForm"
+                    (ngSubmit)="activeSubmitCronogramaForm()">
+                    <div class="row">
+                        <div class="col-6 ">
+                            <div class="form-group">
+                                <label>Fecha Inicio</label>
+                                <div class="col-12">
+                                    <div class="input-group">
+                                        <input id="dateOfBirth" class="form-control calendar" placeholder="aaaa-mm-dd"
+                                            name="dp" ngbDatepicker #dp="ngbDatepicker" (click)="dp.toggle()" formControlName="fechaI">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-5 px-1">
+                            <div class="form-group">
+                                <label>Fecha Terminacion</label>
+                                <div class="col-12">
+                                    <div class="input-group">
+                                        <input id="dateOfBirth" class="form-control calendar" placeholder="aaaa-mm-dd"
+                                            name="df" ngbDatepicker #df="ngbDatepicker" (click)="df.toggle()" formControlName="fechaF">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label>Cantidad Horas</label>
+                                <div class="col-12">
+                                    <div class="input-group">
+                                        <input type="number" formControlName="horas">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-5 px-1">
+                            <div class="form-group">
+                                <label>Fecha Limite de inscripcion</label>
+                                <div class="col-12">
+                                    <div class="input-group">
+                                        <input id="dateOfBirth" class="form-control calendar" placeholder="aaaa-mm-dd"
+                                            name="fl" ngbDatepicker #fl="ngbDatepicker" (click)="fl.toggle()" formControlName="fechaLInscripcion">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Fecha Limite pago de inscripcion</label>
+                                <div class="col-12">
+                                    <div class="input-group">
+                                        <input id="dateOfBirth" class="form-control calendar" placeholder="aaaa-mm-dd"
+                                            name="flp" ngbDatepicker #flp="ngbDatepicker" (click)="flp.toggle()" formControlName="fechaLPInscripcion">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-5 px-1">
+                            <div class="form-group">
+                                <label>Fecha Limite de pago de matricula</label>
+                                <div class="col-12">
+                                    <div class="input-group">
+                                        <input id="dateOfBirth" class="form-control calendar" placeholder="aaaa-mm-dd"
+                                            name="flpm" ngbDatepicker #flpm="ngbDatepicker" (click)="flpm.toggle()" formControlName="fechaLPMatricula">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Fecha Limite de entrega de notas</label>
+                                <div class="col-12">
+                                    <div class="input-group">
+                                        <input id="dateOfBirth" class="form-control calendar" placeholder="aaaa-mm-dd"
+                                            name="fln" ngbDatepicker #fln="ngbDatepicker" (click)="fln.toggle()" formControlName="fechaLEntregaNotas">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-5 px-1">
+                            <div class="form-group">
+                                <label>Fecha de sustentaciones</label>
+                                <div class="col-12">
+                                    <div class="input-group">
+                                        <input id="dateOfBirth" class="form-control calendar" placeholder="aaaa-mm-dd"
+                                            name="fs" ngbDatepicker #fs="ngbDatepicker" (click)="fs.toggle()">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </form>
+                <footer>
+                    <div>
+                        <button type="button" class="btn btn-danger" (click)="displayAlly=false"> Cancelar</button>
+                        <button type="button" (click)="activeSubmitCronogramaForm()" class="btn btn-danger">Guardar</button>
+                    </div>
+                </footer>
+            </div>
+        </div>
+    </div>
+</div>
