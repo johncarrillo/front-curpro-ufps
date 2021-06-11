@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { RolAsignarUsuario } from '../models/RolAsignarUsuario';
 import { Usuario } from '../models/usuario';
+import { environment } from 'src/environments/environment'
 
 const cabecera = {
   headers: new HttpHeaders({'Content-Type' : 'application/json'})
@@ -13,7 +14,7 @@ const cabecera = {
 })
 export class UsuarioService {
 
-  usuarioURL = 'http://localhost:8080/usuario'
+  usuarioURL = environment.baseUrl + 'usuario'
   constructor(private httpClient: HttpClient) { }
 
   public lista(): Observable <Usuario[]> {

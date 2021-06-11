@@ -4,6 +4,7 @@ import { SocialAuthService } from 'angularx-social-login';
 import { Observable } from 'rxjs';
 import { InformacionUsuario } from '../models/informacionUsuario';
 import { TokenDto } from '../models/token-dto';
+import { environment } from 'src/environments/environment'
 
 const cabecera = {
   headers: new HttpHeaders({'Content-Type' : 'application/json'})
@@ -20,7 +21,7 @@ export class OauthService {
   private oauthService: SocialAuthService
   
 
-  oauthURL = 'http://localhost:8080/oauth/'
+  oauthURL = environment.baseUrl + 'oauth/'
   constructor(private httpClient: HttpClient) { }
 
   public google(tokenDto: TokenDto): Observable<TokenDto> {
