@@ -5,5 +5,5 @@
 
 export const environment = {
   production: false,
-  baseUrl: 'http://localhots:8080/'
+  baseUrl: 'http://34.134.32.125:8080/'
 };
