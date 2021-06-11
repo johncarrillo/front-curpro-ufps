@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { RolAsignarUsuario } from '../models/RolAsignarUsuario';
 import { Usuario } from '../models/usuario';
-import { environment } from 'src/environments/environment'
+import { environment } from '../../environments/environment'
 
 const cabecera = {
   headers: new HttpHeaders({'Content-Type' : 'application/json'})

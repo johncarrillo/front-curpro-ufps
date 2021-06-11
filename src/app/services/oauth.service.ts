@@ -4,7 +4,7 @@ import { SocialAuthService } from 'angularx-social-login';
 import { Observable } from 'rxjs';
 import { InformacionUsuario } from '../models/informacionUsuario';
 import { TokenDto } from '../models/token-dto';
-import { environment } from 'src/environments/environment'
+import { environment } from '../../environments/environment'
 
 const cabecera = {
   headers: new HttpHeaders({'Content-Type' : 'application/json'})
